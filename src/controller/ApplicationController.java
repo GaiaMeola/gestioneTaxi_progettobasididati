@@ -39,7 +39,7 @@ public class ApplicationController implements Controller {
                     HomeView.showInvalidChoiceMessage();
             }
         }
-
+        //solo se voglio chiudere l'applicazione
         closeConnection();
     }
 
@@ -119,11 +119,11 @@ public class ApplicationController implements Controller {
 
     private boolean changeRole(Ruolo role) {
         try {
-            System.out.println("🔄 Tentativo di cambio ruolo a: " + role);
+            /*System.out.println("🔄 Tentativo di cambio ruolo a:" + role);*/
 
             // Cambia ruolo e forza la creazione di una nuova istanza
             ConnectionFactory.changeRole(role);
-            System.out.println("✅ Connessione aggiornata con il ruolo: " + role);
+            /*System.out.println("✅ Connessione aggiornata con il ruolo:" + role);*/
 
             try (Statement stmt = ConnectionFactory.getConnection().createStatement();
                  ResultSet rs = stmt.executeQuery("SELECT CURRENT_USER();")) {
@@ -131,11 +131,9 @@ public class ApplicationController implements Controller {
                     System.out.println("🔍 Utente autenticato su MySQL dopo cambio ruolo: " + rs.getString(1));
                 }
             }
-
-
             return false;
         } catch (SQLException | IOException e) {
-            HomeView.showErrorMessage("❌ Errore durante il cambio di ruolo: " + e.getMessage());
+            HomeView.showErrorMessage("Errore durante il cambio di ruolo: " + e.getMessage());
             return true;
         }
     }
@@ -146,7 +144,7 @@ public class ApplicationController implements Controller {
             Connection connection = ConnectionFactory.getConnection();
             if (connection != null && !connection.isClosed()) {
                 connection.close();
-                System.out.println("✅ Connessione chiusa con successo.");
+                System.out.println("Connessione chiusa con successo.");
             }
         } catch (SQLException e) {
             throw new RuntimeException("Errore durante la chiusura della connessione", e);

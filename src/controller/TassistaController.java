@@ -24,7 +24,11 @@ public class TassistaController implements Controller{
             switch (choice) {
                 case 1:
                     // Visualizza corse attive
-                    visualizzaCorseAttive();
+                    try {
+                        visualizzaCorseAttive();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 case 2:
                     // Termina corsa
@@ -47,7 +51,7 @@ public class TassistaController implements Controller{
         }
     }
 
-    private void visualizzaCorseAttive() {
+    private void visualizzaCorseAttive() throws SQLException {
         TassistaView.displayMessage("Visualizza richieste di corsa in attesa...");
 
         try {
@@ -84,7 +88,7 @@ public class TassistaController implements Controller{
         }
     }
 
-    private void accettaCorsa(Richiesta richiesta) {
+    private void accettaCorsa(Richiesta richiesta) throws SQLException {
         TassistaView.displayMessage("Accettazione in corso...");
 
         String usernameTassista = SessionManager.getUsername();  // Recuperiamo lo username del tassista dalla sessione
@@ -108,7 +112,7 @@ public class TassistaController implements Controller{
             AccettaRichiestaProcedureDAO accettaDAO = new AccettaRichiestaProcedureDAO();
             String esito = accettaDAO.execute(richiesta);  // Passiamo l'oggetto richiesta completo
             TassistaView.displayMessage(esito);  // Mostriamo il risultato dell'operazione
-        } catch (SQLException e) {
+        } catch (DAOException e) {
             TassistaView.displayMessage("Errore durante l'elaborazione dell'accettazione della corsa. Riprovare più tardi.");
         }
     }

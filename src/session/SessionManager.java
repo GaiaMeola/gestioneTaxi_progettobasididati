@@ -11,13 +11,6 @@ public class SessionManager {
         SessionManager.credenziali = credenziali;
     }
 
-    public static Credenziali getCredenziali() {
-        if (credenziali == null) {
-            throw new IllegalStateException("Nessun utente loggato.");
-        }
-        return credenziali;
-    }
-
     //così da ottenere l'username dell'utente attualmente loggato
     public static String getUsername() {
         if (credenziali == null) {
