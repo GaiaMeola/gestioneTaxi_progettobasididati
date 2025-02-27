@@ -1,5 +1,6 @@
 package connection;
 
+import exceptions.DAOException;
 import model.Ruolo;
 
 import java.io.FileInputStream;
@@ -26,7 +27,7 @@ public class ConnectionFactory {
         return connection;
     }
 
-    private static void createConnection() throws SQLException {
+    private static void createConnection()  {
         try (InputStream input = new FileInputStream("src/resources/db.properties")) {
             Properties properties = new Properties();
             properties.load(input);
@@ -37,10 +38,10 @@ public class ConnectionFactory {
 
             // Crea una nuova connessione
             connection = DriverManager.getConnection(connection_url, user, pass);
-            System.out.println("Connessione al database stabilita con successo.");
+            /*System.out.println("Connessione al database stabilita con successo.");*/
         } catch (IOException | SQLException e) {
             // Gestione delle eccezioni
-            throw new SQLException("Errore nel creare una nuova connessione al database", e);
+            throw new DAOException("Errore nel creare una nuova connessione al database");
         }
     }
 
@@ -61,10 +62,10 @@ public class ConnectionFactory {
 
             // Crea la connessione con il nuovo ruolo
             connection = DriverManager.getConnection(connection_url, user, pass);
-            System.out.println("Connessione aggiornata con il ruolo: " + role);
+            /*System.out.println("Connessione aggiornata con il ruolo:" + role);*/
         } catch (SQLException | IOException e) {
             // Gestione delle eccezioni
-            throw new SQLException("Errore durante il cambio di ruolo o la connessione al database", e);
+            throw new DAOException("Errore durante il cambio di ruolo o la connessione al database");
         }
     }
 
@@ -87,6 +88,6 @@ public class ConnectionFactory {
 
         // Crea una nuova connessione con le credenziali di login
         connection = DriverManager.getConnection(url, user, password);
-        System.out.println("Connessione riaperta come utente di login: " + user);
+        /*System.out.println("Connessione riaperta come utente di login:" + user);*/
     }
 }
