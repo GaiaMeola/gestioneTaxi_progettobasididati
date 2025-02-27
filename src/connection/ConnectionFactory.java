@@ -69,7 +69,7 @@ public class ConnectionFactory {
         }
     }
 
-    public static synchronized void logout() throws SQLException, IOException {
+    public static void logout() throws SQLException, IOException {
         // Chiudi la connessione attuale, se è aperta
         if (connection != null && !connection.isClosed()) {
             System.out.println("Chiudendo la connessione...");
