@@ -113,7 +113,7 @@ public class TassistaController implements Controller{
             String esito = accettaDAO.execute(richiesta);  // Passiamo l'oggetto richiesta completo
             TassistaView.displayMessage(esito);  // Mostriamo il risultato dell'operazione
         } catch (DAOException e) {
-            TassistaView.displayMessage("Errore durante l'elaborazione dell'accettazione della corsa. Riprovare più tardi.");
+            TassistaView.displayMessage("Errore durante l'elaborazione dell'accettazione della corsa: " +  e.getMessage());
         }
     }
 

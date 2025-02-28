@@ -22,5 +22,4 @@ public class SessionManager {
     public static void logout() {
         credenziali = null;
     }
-
 }

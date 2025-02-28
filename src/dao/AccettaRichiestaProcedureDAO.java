@@ -21,6 +21,7 @@ public class AccettaRichiestaProcedureDAO implements GenericProcedureDAO<Richies
             // Impostiamo i parametri della stored procedure
             stmt.setString(1, richiesta.getTassista());  // Numero di patente del tassista
             stmt.setInt(2, richiesta.getId());  // ID della richiesta
+
             stmt.registerOutParameter(3, java.sql.Types.VARCHAR);  // Parametro di uscita: esito
 
             // Eseguiamo la stored procedure

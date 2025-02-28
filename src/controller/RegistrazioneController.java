@@ -35,7 +35,7 @@ public class RegistrazioneController implements Controller {
                     break;
                 case 2:
                     // Registrazione come Tassista
-                    HomeView.displayMessage("Registrazione come Tassista.");
+                    HomeView.displayMessage("Registrazione come Tassista...");
                     registraTassista();
                     registered = true;
                     break;
